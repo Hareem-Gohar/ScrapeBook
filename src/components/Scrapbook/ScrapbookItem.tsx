@@ -7,39 +7,51 @@ import { ScrapbookItemType } from "./scrapbookData";
 
 interface Props {
   item: ScrapbookItemType;
+  containerRef: React.RefObject<HTMLDivElement>;
 }
 
-export default function ScrapbookItem({ item }: Props) {
+export default function ScrapbookItem({ item, containerRef }: Props) {
   const [hovered, setHovered] = useState(false);
 
   return (
     <motion.div
-      className="relative flex flex-col items-center"
+      className="absolute flex flex-col items-center select-none"
       drag
+      dragConstraints={containerRef}
+      dragElastic={0.15}
+      dragMomentum={false}
       dragSnapToOrigin
       whileTap={{ scale: 0.95 }}
       onHoverStart={() => setHovered(true)}
       onHoverEnd={() => setHovered(false)}
       style={{
-        rotate: Math.random() * 10 - 5 // random slight tilt
+        left: item.x,
+        top: item.y,
+        rotate: item.rotate,
+        cursor: "grab",
       }}
     >
-      <div className="sticker-wrapper cursor-grab">
+      <div>
         <Image
           src={item.src}
           alt={item.alt}
           width={120}
           height={120}
-          className="sticker-img"
+          style={{
+            border: "6px solid white",
+            borderRadius: "8px",
+            boxShadow: "0 4px 8px rgba(0,0,0,0.15)",
+            backgroundColor: "white",
+          }}
         />
       </div>
 
       {hovered && (
         <motion.div
-          initial={{ opacity: 0, y: 10 }}
+          initial={{ opacity: 0, y: 6 }}
           animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: 10 }}
-          className="absolute top-full mt-2 p-2 text-sm bg-black text-white rounded shadow-md whitespace-nowrap z-10"
+          exit={{ opacity: 0, y: 6 }}
+          className="absolute top-[calc(100%+8px)] p-2 text-sm bg-black text-white rounded shadow-md whitespace-nowrap z-10"
         >
           {item.message}
         </motion.div>

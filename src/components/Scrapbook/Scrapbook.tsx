@@ -1,16 +1,25 @@
+"use client";
+
+import { useRef } from "react";
 import ScrapbookItem from "./ScrapbookItem";
 import { scrapbookItems } from "./scrapbookData";
-import "./scrapbook.css";
 
 export default function Scrapbook() {
+  const containerRef = useRef<HTMLDivElement>(null);
+
   return (
-    <section className="py-12 rounded-lg shadow-inner bg-[url('/images/dots-bg.png')] bg-repeat">
-      <h2 className="text-xl font-semibold mb-6">Scrapbook</h2>
-      <div className="flex gap-8 flex-wrap justify-center">
-        {scrapbookItems.map((item) => (
-          <ScrapbookItem key={item.id} item={item} />
-        ))}
-      </div>
-    </section>
+    <div
+      ref={containerRef}
+      className="relative w-full h-[400px] overflow-hidden rounded-xl border border-gray-200"
+      style={{
+        backgroundImage:
+          "radial-gradient(#d1d5db 1px, transparent 1px), linear-gradient(#fafafa, #fff)",
+        backgroundSize: "20px 20px, 100% 100%",
+      }}
+    >
+      {scrapbookItems.map((item) => (
+        <ScrapbookItem key={item.id} item={item} containerRef={containerRef} />
+      ))}
+    </div>
   );
 }

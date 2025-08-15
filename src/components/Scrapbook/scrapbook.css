@@ -1,12 +1,1 @@
-.sticker-wrapper {
-  display: inline-block;
-  padding: 6px;
-  background: white;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-}
 
-.sticker-img {
-  display: block;
-  border-radius: 4px;
-}
