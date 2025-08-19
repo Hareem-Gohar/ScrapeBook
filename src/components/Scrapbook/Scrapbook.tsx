@@ -18,7 +18,7 @@ export default function Scrapbook() {
       }}
     >
       {scrapbookItems.map((item) => (
-        <ScrapbookItem key={item.id} item={item} containerRef={containerRef} />
+        <ScrapbookItem key={item.id} item={item} containerRef={containerRef } />
       ))}
     </div>
   );

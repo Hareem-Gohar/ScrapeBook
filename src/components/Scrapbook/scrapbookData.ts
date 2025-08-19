@@ -3,9 +3,9 @@ export interface ScrapbookItemType {
   src: string;
   alt: string;
   message: string;
-  x: number; // position from left
-  y: number; // position from top
-  rotate: number; // rotation in degrees
+  x: number; 
+  y: number; 
+  rotate: number; 
 }
 
 export const scrapbookItems: ScrapbookItemType[] = [
